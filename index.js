@@ -1,6 +1,7 @@
 import  express  from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import User from "./User.js";
 
 
 
@@ -41,6 +42,18 @@ app.get('/', (req, res) => {
             )
          })
 
+    app.use("/signUp",async (req, res) =>{
+
+        try {
+            const newUser = new User({ ...req.body });
+            await newUser.save();
+            res.status(200).send("User has been created!");
+          } catch (error) {
+            console.log("Error");
+          }
+
+
+    })
 
 
 
