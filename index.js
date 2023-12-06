@@ -6,21 +6,31 @@ import dotenv from "dotenv";
 
 
 
-
 const app = express();
+app.use(express.json())
 dotenv.config()
 const PORT = 8000;
 
-const Connect =() =>{
-    mongoose.connect(process.env.MONGO_URL)
-    .then(()=>{
-        console.log("Database Connected")
-    })
-    .catch((err)=>{
-        throw err;
-    })
+// const Connect =() =>{
+//     mongoose.connect(process.env.MONGOURL)
+//     .then(()=>{
+//         console.log("Database Connected")
+//     })
+//     .catch((err)=>{
+//         throw err;
+//     })
 
-}
+// }
+const Connect = () => {
+    mongoose
+        .connect(process.env.MONGOURL)
+        .then(() => {
+            console.log('connected to DB');
+        })
+        .catch((err) => {
+            throw err;
+        });
+};
 // Middleware
 app.get('/', (req, res) => {
             res.status(200).send(
@@ -32,7 +42,7 @@ app.get('/', (req, res) => {
          })
 
 
-app.use(express.json())
+
 
 // app.use((err, req, res, next)=>{
 //     const status = err.status || 500;
