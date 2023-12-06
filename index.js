@@ -22,6 +22,14 @@ const Connect =() =>{
 
 }
 // Middleware
+app.get('/', (req, res) => {
+            res.status(200).send(
+                {
+                    status: 'succes',
+                    message: 'You are connected'
+                }
+            )
+         })
 
 
 app.use(express.json())
